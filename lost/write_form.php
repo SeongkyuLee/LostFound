@@ -3,12 +3,23 @@
 	$userid=$_SESSION['userid'];
 	$usernick=$_SESSION['usernick'];
 	$page=1;
-	
+
+	if(!$userid) {
+		echo("
+			<script>
+				window.alert('로그인 후 이용해 주세요.')
+				location.href='/lostandfound/login/login_form.php'
+			</script>
+		");
+		exit;
+	}
+
 	include "../lib/dbconn.php";
 	$sql="SELECT member.nick FROM member INNER JOIN lost ON member.id='$userid';";
 	$result=mysql_query($sql, $connect);
 	$row=mysql_fetch_array($result);
 	$usernick=$row['nick'];
+
 ?>
 <!DOCTYPE html>
 <html>

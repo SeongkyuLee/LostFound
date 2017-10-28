@@ -61,7 +61,7 @@
 			echo("
 				<script>
 					window.alert('로그인에 성공했습니다.')
-					location.href='../index.php';
+					history.go(-2)
 				</script>
 			");
 		}

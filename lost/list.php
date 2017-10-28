@@ -23,10 +23,13 @@
 
 		$scale=10;
 		$mode=$_GET['mode'];
-		$find=$_GET['find'];
-		
 		if($mode=="search") { //검색 모드
+			$find=$_GET['find'];	
 			$search=$_GET['search'];
+
+			setcookie('find', $find, time() + 60 * 60 * 24 * 1000, '/');
+			setcookie('search', $search, time() + 60 * 60 * 24 * 1000, '/');
+
 			if(!$search) {
 				echo ("
 					<script>

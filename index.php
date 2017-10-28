@@ -31,7 +31,76 @@
 					<a class="btn btn-lg btn-secondary" href="./found/write_form.php" role="button">습득물 등록</a>
 				</p>
 			</div><!--end of jumbotron-->
-		
+
+			<div class="row marketing">
+				<div class="col-lg-6">
+					<input type="text" id="address" placeholder="주소 입력" />
+					<button onclick="changeAddress()" id="address_btn" >주소 변경</button>
+
+					<div id="map">지도</div>
+					<?php include "./lib/map.php"; ?>
+					<script>
+						function setCookie(cname, cvalue, exdays) {
+							var date = new Date();
+							date.setTime(date.getTime() + (exdays*24*60*60*1000));
+							var expires = "expires="+ date.toUTCString();
+							document.cookie= cname+"="+cvalue+";"+expires+";path=/";
+						}
+						function getCookie(cname) {
+							var name = cname + "=";
+							var decodedCookie = decodeURIComponent(document.cookie);
+							var ca = decodedCookie.split(';');
+							for(var i = 0; i < ca.length; i++) {
+								var c = ca[i];
+								while (c.charAt(0) ==' ') {
+									c = c.substring(1);
+								}
+								if (c.indexOf(name) == 0) {
+									return c.substring(name.length, c.length);
+								}
+							}
+							return "";
+						}
+						
+						var address = getCookie("user_address");
+						searchAddressToCoordinate(address);
+						function changeAddress() {
+							var input = document.getElementById("address").value;
+							searchAddressToCoordinate(input);
+							setCookie("user_address", input, 1);
+						}
+					</script>
+				</div>
+				<div class="col-lg-6">
+					<?php
+						include "./lib/dbconn.php";
+					
+						$find=$_COOKIE['find'];
+						$search=$_COOKIE['search'];
+
+						echo "<h4>최근 검색한 키워드 : $search</h4>";
+
+						if($search and $find) {
+							$sql = "SELECT * FROM lost WHERE $find LIKE '%$search%' ORDER BY num DESC";
+							$result=mysql_query($sql, $connect);
+							$total_record=mysql_num_rows($result);
+
+							if($total_record != 0) {
+								$list_num = min(3, $total_record);
+								for ($i = 0;$i < $list_num;$i++) {
+									mysql_data_seek($result, $i);
+									$row=mysql_fetch_array($result);
+
+									echo "<h5> 제목 : $row[subject] </h5>";
+									echo "<p> 내용 : <br/>  $row[content] </p>";
+									echo "<img src='$row[image_path]' />";
+								}
+							}
+						}
+					?>
+				</div>
+			</div>
+
 			<!--
 			<div class="row marketing">
 				<div class="col-lg-6" id="lost-img">

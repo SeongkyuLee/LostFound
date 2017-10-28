@@ -4,7 +4,6 @@
 	$userid=$_SESSION['userid'];
 
 	include "../lib/dbconn.php";
-
 	$num=$_GET['num'];
 	$sql="SELECT * FROM lost WHERE num=$num";
 
@@ -22,9 +21,18 @@
 	$item_hit=$row['hit'];
 
 	$page=$_GET['page'];
-	$new_hit=$item_hit + 1;
-	$sql="UPDATE lost SET hit=$new_hit WHERE num=$num";
-	mysql_query($sql, $connect);
+	$cookie_name='lost_view'.$item_num;
+
+	//쿠키 사용해서 조회수 올려주기
+	if(empty($_COOKIE[$cookie_name])) {
+		setcookie($cookie_name,TRUE);
+
+		echo $_COOKIE[$cookie_name];	
+		$item_hit=$item_hit + 1;
+		$sql="UPDATE lost SET hit=$item_hit WHERE num=$num";
+		mysql_query($sql, $connect);
+	}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,6 +49,7 @@
         
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/main.css">
+
 
 		<script>
 			function check_input() {
@@ -78,13 +87,19 @@
 				</div>
 			</div> <!-- end of view_title-->
 			<hr>
-
-			<hr>
 			<div id="view_content">
 				내용 : <?=$item_content?>
 				<img src="<?=$item_image_path?>">
 			</div>
 			<hr>
+			
+			<div id="map" style="width:50%;height=50%;"> 지도 </div>
+			<?php include "../lib/map.php"; ?>
+			<script>
+				searchAddressToCoordinate('<?=$item_place?>');
+			</script>
+
+			<hr>		
 			<div id="ripple">
 				<?php
 					$item_num = $_GET['num'];
@@ -99,7 +114,7 @@
 						$ripple_content=str_replace(" ", "&nbsp;", $ripple_content);
 						$ripple_date=$row_ripple['regist_day'];
 				?>
-				<hr>
+
 				<ul>
 					<li id="writer_title1">
 						<?=$ripple_nick?>
@@ -123,12 +138,10 @@
 						<?=$ripple_content?>
 					</li>
 				</ul>
-				<hr>
 				<?php
 					}
 				?>
 			</div>
-			<hr>
 			<form name="ripple_form" method="post" action="insert_ripple.php">
 				<div id="ripple_box">
 					<div id="ripple_box1">

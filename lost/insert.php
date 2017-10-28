@@ -8,7 +8,7 @@
 
 	if($_FILES["image"]) {
 		$temp_file=$_FILES["image"]["tmp_name"];
-		$target_dir="../data/";
+		$target_dir="/lostandfound/data/";
 		$target_file=$target_dir.basename($_FILES["image"]["name"]);
 		move_uploaded_file($temp_file, $target_file);
 	} else {
@@ -51,7 +51,7 @@
 
 	if($mode=="modify") {
 		$num=$_POST['num'];
-		$sql="UPDATE lost SET subject='$subject', content='$content', place='$place', image_path=$target_file WHERE num=$num;";
+		$sql="UPDATE lost SET subject='$subject', content='$content', place='$place', image_path='$target_file' WHERE num=$num;";
 	} else {
 		$sql="INSERT INTO lost(id, subject, content, place, image_path, regist_day, hit)";
 		$sql.="VALUES('$userid', '$subject', '$content', '$place', '$target_file', '$regist_day', 0);";

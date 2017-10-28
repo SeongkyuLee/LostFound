@@ -29,24 +29,20 @@
 					<h1> 로그인 </h1>
 				</div>
 				<div id="login_form">
-					<div id="id_pw_input">
-						<ul>
-							<li>
-								<input type="text" name="id" class="login_input" placeholder="아이디">
-							</li>
-							<li>
-								<input type="password" name="pass" class="login_input" placeholder="비밀번호">
-							</li>
-						</ul>
+					<div>
+						<input type="text" name="id" class="login_input" placeholder="아이디">
+					</div>
+					<div>
+						<input type="password" name="pass" class="login_input" placeholder="비밀번호">
 					</div>
 				</div> <!-- end of login_form -->
-				<div id="login_button">
+				<span id="login_button">
 					<input type="submit" value="로그인">
-				</div>
+				</span>
 
-				<div id="join_button">
+				<span id="join_button">
 					<a href="../member/member_form.php">회원가입</a>
-				</div>
+				</span>
 			</form>
 		</div>
 
