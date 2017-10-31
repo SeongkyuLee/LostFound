@@ -21,9 +21,9 @@
 - 글 추가/수정/삭제 : 제목, 내용, 장소, 이미지 등을 등록합니다. 사용자는 글을 수정하거나 삭제할 수 있습니다. <br/>
 - 댓글 추가/수정/삭제 : 해당 글에 댓글을 추가, 수정, 삭제합니다. <br/>
 
-<h3>3. <a href="https://photos.app.goo.gl/3YBpJGQ1gWwDfrR72"> 자동추천 </a> </h3>
+<h2>3. <a href="https://photos.app.goo.gl/3YBpJGQ1gWwDfrR72"> 자동추천 </a> </h2>
 - 지도 : 사용자의 위치 또는 설정한 지역에 따라서 주변의 분실물과 습득물을 표시합니다. 네이버 API를 이용해서 지도를 표시합니다. </br>
 - 추천 글 : 사용자가 최근 검색한 키워드에 맞춰서 글을 추천해줍니다.
 
-<h4>4. <a href="https://photos.app.goo.gl/S1HltqSBnKefrOVD3"> 쪽지 </a> </h4>
+<h2>4. <a href="https://photos.app.goo.gl/S1HltqSBnKefrOVD3"> 쪽지 </a> </h2>
 - 쪽지 : 상대방의 닉네임을 이용하여 쪽지를 주고 받습니다. 휴대폰 번호, 이메일을 노출하지 않고 다른 사용자와 연락을 주고 받을 수 있습니다. </br>
